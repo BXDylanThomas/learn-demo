@@ -96,7 +96,9 @@ public class UrlMappingController {
 
     private void builderExcel(HttpServletResponse response, Map<String, List<String>> map) throws IOException {
         ExcelWriter build = EasyExcel.write(response.getOutputStream()).build();
-        WriteSheet sheet = EasyExcel.writerSheet("P05").head(createHead()).registerWriteHandler(createColumnLengthStrategy(map)).build();
+        WriteSheet sheet = EasyExcel.writerSheet("P05").head(createHead())
+                .registerWriteHandler(ExcelStyleUtil.globleStyle())
+                .registerWriteHandler(createColumnLengthStrategy(map)).build();
 
         AtomicInteger atomicInteger = new AtomicInteger(0);
         AtomicInteger mergeStart = new AtomicInteger(0);
@@ -175,4 +177,3 @@ public class UrlMappingController {
     }
 
 }
- 
